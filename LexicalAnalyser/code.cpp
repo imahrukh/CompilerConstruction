@@ -26,12 +26,14 @@ int main(int argc, char *argv[]) {
         cerr << "Error opening output file." << endl;
         return 1;
     }
+    
+    string line;
+    while (getline(inFile, line)) {  // Read input line by line
+        tokenize(line, outFile);     // Tokenize the current line
+        outFile << '\n';            // Add newline after each line's tokens
+    }
 
-    string input((istreambuf_iterator<char>(inFile)), istreambuf_iterator<char>());
     inFile.close();
-
-    tokenize(input, outFile);
-
     outFile.close();
     return 0;
 }
