@@ -1,0 +1,36 @@
+// Lexer Transition Diagram
+digraph {
+	rankdir=LR splines=ortho
+	Start [shape=point]
+	Accept [shape=doublecircle]
+	subgraph cluster_0 {
+		color=blue label=Identifier
+		IdState1
+		Start -> IdState1 [label="[a-zA-Z_]"]
+		IdState1 -> IdState1 [label="[a-zA-Z0-9_]"]
+		IdState1 -> Accept [label=Other]
+	}
+	subgraph cluster_1 {
+		color=green label="Integer Literal"
+		IntState1
+		Start -> IntState1 [label="[0-9]"]
+		IntState1 -> IntState1 [label="[0-9]"]
+		IntState1 -> Accept [label=Other]
+	}
+	subgraph cluster_2 {
+		color=purple label="Character Literal"
+		CharState1
+		CharState2
+		Start -> CharState1 [label="'"]
+		CharState1 -> CharState2 [label="[^']"]
+		CharState2 -> Accept [label="'"]
+	}
+	subgraph cluster_3 {
+		color=red label="Relational Operators"
+		RelState1
+		Start -> RelState1 [label="=,!,<,>"]
+		RelState1 -> Accept [label="="]
+		RelState1 -> Accept [label=Other]
+	}
+	Start -> Accept [label="; { } ( )" color=orange]
+}
