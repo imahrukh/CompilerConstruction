@@ -1,0 +1,4 @@
+int x = 10;
+if (x <= 20) { x = 'a'; }
+char ch;
+ch = 'a';
